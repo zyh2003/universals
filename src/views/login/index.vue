@@ -7,7 +7,7 @@
       class="login-form"
     >
       <div class="title-container">
-        <h3 class="title">用户登录1</h3>
+        <h3 class="title">用户登录</h3>
         <span class="translate">
           <svg-icon class="language" iconClass="language"></svg-icon>
         </span>
