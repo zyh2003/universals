@@ -44,14 +44,16 @@
   </div>
 </template>
 <script setup>
-import UserApi from '@/api/user'
+import util from '@/utils/util'
 import { reactive, ref } from 'vue'
+import { useStore } from 'vuex'
 import { validatePassword } from './rule'
 import { useRouter } from 'vue-router'
 import md5 from 'md5'
-const router = useRouter()
 const LoginForm = ref()
 const inputType = ref('password')
+const store = useStore()
+const router = useRouter()
 const loginForm = reactive({
   username: 'admin',
   password: '123456'
@@ -76,11 +78,10 @@ const handleLoginSubmit = async () => {
   if (!LoginForm.value) return
   await LoginForm.value.validate(async (valid) => {
     if (valid) {
-      alert('登录成功')
-      loginForm.password = md5(loginForm.password)
-      const response = await UserApi.login(loginForm)
-      console.log(response)
-      router.push('/Home')
+      const newLoginForm = util.deepCopy(loginForm)
+      newLoginForm.password = md5(newLoginForm.password)
+      store.dispatch('user/login', newLoginForm)
+      router.push('/home')
     }
   })
 }
