@@ -8,9 +8,17 @@
     >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
-        <span class="translate">
-          <svg-icon class="language" iconClass="language"></svg-icon>
-        </span>
+
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          content="国际化"
+          placement="bottom"
+        >
+          <span class="translate">
+            <svg-icon class="language" iconClass="language"></svg-icon>
+          </span>
+        </el-tooltip>
       </div>
       <el-form-item prop="username">
         <span class="users">
@@ -41,6 +49,28 @@
         >登录</el-button
       >
     </el-form>
+    <div class="txts">
+      测试权限账号：
+      <br />
+      提供三种权限账号：
+      <br />
+      1. 超级管理员账号： super-admin
+      <br />
+      2. 管理员账号：admin
+      <br />
+      3.测试可配置账号：test
+      <br />
+      密码统一为：123456
+      <br />
+      <br />
+      导入用户账号：
+      <br />
+      可使用导入的用户名登录
+      <br />
+      密码统一为：123456
+      <br />
+      <b> 注意：导入用户区分中英文库！！！！</b>
+    </div>
   </div>
 </template>
 <script setup>
@@ -80,8 +110,8 @@ const handleLoginSubmit = async () => {
     if (valid) {
       const newLoginForm = util.deepCopy(loginForm)
       newLoginForm.password = md5(newLoginForm.password)
-      store.dispatch('user/login', newLoginForm)
-      router.push('/home')
+      const response = await store.dispatch('user/login', newLoginForm)
+      if (response.token) router.push('/')
     }
   })
 }
@@ -105,7 +135,7 @@ $cursor: #fff;
     position: absolute;
     left: 50%;
     margin-left: -260px;
-    top: 160px;
+    top: 120px;
     overflow: hidden;
     ::v-deep .el-form-item {
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -152,12 +182,16 @@ $cursor: #fff;
       display: inline-block;
       width: 30px;
       height: 30px;
+      margin-left: 10px;
+      margin-top: 2px;
       .user {
         width: 1.2em;
         height: 1.2em;
       }
     }
     .passwords {
+      margin-left: 10px;
+      margin-top: 2px;
       display: inline-block;
       width: 30px;
       height: 30px;
@@ -221,6 +255,22 @@ $cursor: #fff;
       width: 100%;
       margin-bottom: 30px;
     }
+  }
+  .tooltip-base-box .box-item {
+    width: 110px;
+    margin-top: 10px;
+  }
+  .txts {
+    width: 520px;
+    padding: 0 35px;
+    position: absolute;
+    left: 50%;
+    margin-left: -260px;
+    top: 370px;
+    font-size: 16px;
+    line-height: 28px;
+    color: #fff;
+    margin-bottom: 10px;
   }
 }
 </style>

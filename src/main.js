@@ -6,6 +6,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import './styles/index.css'
 import '@/assets/icons'
+import './routerGuard'
 import SvgIcon from '@/components/plugins/svgIcon.vue'
 console.log(process.env.VUE_APP_BASE_API)
 createApp(App).use(ElementPlus).use(store).use(router).component('svg-icon', SvgIcon).mount('#app')

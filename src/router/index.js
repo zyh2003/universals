@@ -1,17 +1,15 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Login from '../views/login/index.vue'
-
 const publicRoutes = [
   {
-    path: '/',
+    path: '/Login',
     name: 'Login',
-    component: Login
+    component: () => import('../views/login')
     // redirect:Login
   },
   {
-    path: '/Home',
-    name: 'Home',
-    component: () => import('../views/home/Home.vue')
+    path: '/',
+    name: 'index',
+    component: () => import('../layout/index')
   }
 ]
 
