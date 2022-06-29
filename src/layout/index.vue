@@ -6,7 +6,7 @@
         <navbar></navbar>
         <tags-view></tags-view>
       </div>
-      <app-main></app-main>
+      <app-main class="app-main"></app-main>
     </div>
   </div>
 </template>
@@ -47,6 +47,9 @@ import TagsView from '@/components/TagsView'
       z-index: 9;
       width: calc(100% - 210px);
     }
+  }
+  .app-main{
+    overflow-y: auto !important;
   }
 }
 ::-webkit-scrollbar {

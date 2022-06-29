@@ -8,44 +8,42 @@
     >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
-
         <el-tooltip
           class="box-item"
           effect="dark"
           content="国际化"
           placement="bottom"
         >
-          <span class="translate">
-            <svg-icon class="language" iconClass="language"></svg-icon>
+          <span>
+            <svg-icon className="svg-language" icon="language"></svg-icon>
           </span>
         </el-tooltip>
       </div>
       <el-form-item prop="username">
-        <span class="users">
-          <svg-icon class="user" iconClass="user"></svg-icon>
+        <span class="svg-container">
+          <el-icon>
+            <svg-icon icon="user"></svg-icon>
+          </el-icon>
         </span>
         <el-input v-model.trim="loginForm.username" />
       </el-form-item>
       <el-form-item prop="password">
-        <span class="passwords">
-          <svg-icon class="password" iconClass="password"></svg-icon>
+        <span class="svg-container">
+          <el-icon>
+            <svg-icon icon="password"></svg-icon>
+          </el-icon>
         </span>
         <el-input
           :type="inputType"
           v-model.trim="loginForm.password"
         ></el-input>
-        <span class="show-pwd">
-          <svg-icon
-            class="eye"
-            :iconClass="inputType === 'password' ? 'eye' : 'eye-open'"
-            @click="handllePassWordStatus"
-          />
+        <span class="svg-pwd" @click="handllePassWordStatus">
+          <el-icon>
+            <svg-icon :icon="passwordIconStatus"></svg-icon>
+          </el-icon>
         </span>
       </el-form-item>
-      <el-button
-        class="login-button"
-        type="primary"
-        @click="handleLoginSubmit()"
+      <el-button class="login-button" type="primary" @click="handleLoginSubmit"
         >登录</el-button
       >
     </el-form>
@@ -75,7 +73,7 @@
 </template>
 <script setup>
 import util from '@/utils/util'
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { validatePassword } from './rule'
 import { useRouter } from 'vue-router'
@@ -103,6 +101,9 @@ const loginRules = reactive({
       validator: validatePassword
     }
   ]
+})
+const passwordIconStatus = computed(() => {
+  return inputType.value === 'password' ? 'eye' : 'eye-open'
 })
 const handleLoginSubmit = async () => {
   if (!LoginForm.value) return
@@ -148,6 +149,15 @@ $cursor: #fff;
         vertical-align: middle;
         display: inline-block;
       }
+      .svg-pwd {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        font-size: 16px;
+        color: $dark_gray;
+        cursor: pointer;
+        user-select: none;
+      }
     }
     ::v-deep .el-input {
       position: relative;
@@ -178,70 +188,14 @@ $cursor: #fff;
         caret-color: $cursor;
       }
     }
-    .users {
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      margin-left: 10px;
-      margin-top: 2px;
-      .user {
-        width: 1.2em;
-        height: 1.2em;
-      }
-    }
-    .passwords {
-      margin-left: 10px;
-      margin-top: 2px;
-      display: inline-block;
-      width: 30px;
-      height: 30px;
-      .password {
-        width: 1.2em;
-        height: 1.2em;
-      }
-    }
-    .show-pwd {
-      position: absolute;
-      right: 20px;
-      top: 10px;
-      width: 30px;
-      height: 30px;
-      box-sizing: border-box;
-      .eye {
-        width: 1em;
-        height: 1em;
-        // background-color: #fff;
-      }
-      // font-size: 16px;
-      // color: $dark_gray;
-      // background-color: #fff;
-      cursor: pointer;
-      // user-select: none;
-    }
     .title-container {
       position: relative;
-      .translate {
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        background-color: $cursor;
-        border-radius: 5px;
-        box-sizing: border-box;
-        padding: 2px;
-        .language {
-          width: 1.5em;
-          height: 1.5em;
-        }
-      }
       .title {
         font-size: 26px;
         color: $light_gray;
         text-align: center;
         font-weight: bold;
-        margin-bottom: 40px;
+         margin-bottom: 40px;
       }
       .icon {
         position: absolute;
@@ -250,16 +204,26 @@ $cursor: #fff;
         color: $light_gray;
         font-size: 22px;
       }
+      ::v-deep .svg-language {
+        position: absolute;
+        top: 4px;
+        right: 0;
+        background-color: #fff;
+        font-size: 22px;
+        padding: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
     }
     .login-button {
       width: 100%;
       margin-bottom: 30px;
     }
   }
-  .tooltip-base-box .box-item {
-    width: 110px;
-    margin-top: 10px;
-  }
+  // .tooltip-base-box .box-item {
+  //   width: 110px;
+  //   margin-top: 10px;
+  // }
   .txts {
     width: 520px;
     padding: 0 35px;

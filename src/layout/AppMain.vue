@@ -9,7 +9,6 @@
 <style lang="scss" scoped>
 .app-main{
   height : calc(100vh - 85px);
-  padding : 104px 20px 20px 20px;
-  overflow-y: auto;
+  padding : 20px;
 }
 </style>
