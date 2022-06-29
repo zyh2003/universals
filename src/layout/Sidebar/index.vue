@@ -1,27 +1,20 @@
 <template>
   <div class="">
-        <ul>
-          <li @click="$router.push('/1')">1</li>
-          <li @click="$router.push('/2')">2</li>
-          <li @click="$router.push('/3')">3</li>
-          <li @click="$router.push('/4')">4</li>
-          <li @click="$router.push('/5')">5</li>
-        </ul>
+    <h1 class="sidebar-title">usian-admin</h1>
+    <sidebar-menu></sidebar-menu>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import SidebarMenu from './SidebarMenu.vue'
+
+</script>
 
 <style lang="scss" scoped>
-  ul{
-    li{
-      text-align: center;
-      line-height: 30px;
-      background-color: #fff;
-
-    }
-    li:hover{
-      background-color: pink;
-    }
-  }
+.sidebar-title{
+  text-align : center;
+  padding : 15px 0;
+  font-size : 22px;
+  color : #fff;
+}
 </style>

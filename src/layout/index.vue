@@ -4,6 +4,7 @@
     <div class="main-container">
       <div class="fiexed-header">
         <navbar></navbar>
+        <tags-view></tags-view>
       </div>
       <app-main></app-main>
     </div>
@@ -14,6 +15,7 @@
 import Sidebar from './Sidebar/index.vue'
 import Navbar from './Navbar'
 import AppMain from './AppMain'
+import TagsView from '@/components/TagsView'
 </script>
 
 <style lang="scss" scoped>
