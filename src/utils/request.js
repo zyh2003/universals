@@ -1,6 +1,10 @@
 import axios from 'axios'
 import md5 from 'md5'
 import loading from './loading'
+import store from '../store'
+import router from '../router'
+import { isCheckTimeout } from './auth'
+import { ElMessage } from 'element-plus'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
@@ -14,6 +18,16 @@ service.interceptors.request.use(
     const { icode, time } = getTestICode()
     config.headers.icode = icode
     config.headers.codeType = time
+
+    const token = store.getters.token
+    if (token) config.headers.Authorization = 'Bearer ' + token
+
+    if (token) {
+      if (isCheckTimeout()) {
+        store.dispatch('user/logout')
+        router.push('/login')
+      }
+    }
 
     return config
   },
@@ -29,14 +43,39 @@ service.interceptors.response.use(
     // 解决token错误或是过期
     // 把response的data返回给客户端, 不需要可以删除下面1句代码
     loading.close()
-    return response
+
+    const { success, data, message } = response.data
+
+    if (success) {
+      return data
+    } else {
+      _showError(message)
+      return Promise.reject(new Error(message))
+    }
   },
   function (error) {
     // 对响应错误做点什么
     loading.close()
+
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      store.dispatch('user/lgout')
+      router.push('/login')
+    }
+
+    _showError(error.message)
     return Promise.reject(error)
   }
 )
+
+// 响应提示信息
+const _showError = (message) => {
+  const info = message || '发生未知错误'
+  ElMessage.error(info)
+}
 
 // const request = (options) => {
 //   if (options.method.toLowerCase() === 'get') {
