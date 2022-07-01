@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    active-text-color="#fff"
+    active-text-color="skyblue"
     background-color="#304156"
     :default-active="$route.path"
     text-color="#bfcbd9"
@@ -19,9 +19,8 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { filterMenuData } from '@/utils/menu'
-import SidebarMenuItem from './SidebarMenuItem.vue'
 import { filterRouters, generateMenus } from '@/utils/router'
-
+import SidebarMenuItem from './SidebarMenuItem.vue'
 const router = useRouter()
 // const data = [
 //   {

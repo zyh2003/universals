@@ -95,6 +95,7 @@ const handleLogout = async () => {
     console.log(err)
   }
 }
+console.log(avatarUrl)
 </script>
 
 <style lang="scss" scoped>
