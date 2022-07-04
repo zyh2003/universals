@@ -4,6 +4,7 @@ export default {
   path: '/user',
   component: () => import('@/layout'),
   name: 'userManage',
+  redirect: '/user/manage',
   meta: {
     title: '用户',
     icon: 'personnel'

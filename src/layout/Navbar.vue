@@ -1,24 +1,26 @@
 <template>
-  <div class="navbar">
+  <div class="navbar clearfix">
     <div class="navbar-left">
-      <el-icon>
+      <Hamburger class="hamburger-container"></Hamburger>
+      <Breadcrumb></Breadcrumb>
+      <!-- <el-icon>
         <svg-icon icon="hamburger-closed"></svg-icon>
       </el-icon>
       <el-icon>
         <svg-icon icon="hamburger-opened"></svg-icon>
-      </el-icon>
-      <span></span>
+      </el-icon> -->
+      <!-- <span></span> -->
     </div>
     <div class="navbar-right">
-       <el-tooltip
+      <el-tooltip
         class="box-item"
         effect="dark"
         content="功能引导"
         placement="bottom"
       >
-     <el-icon>
-        <svg-icon icon="guide"></svg-icon>
-      </el-icon>
+        <el-icon>
+          <svg-icon icon="guide"></svg-icon>
+        </el-icon>
       </el-tooltip>
 
       <el-icon>
@@ -27,25 +29,25 @@
       <el-icon>
         <svg-icon icon="hamburger-closed"></svg-icon>
       </el-icon>
-       <el-tooltip
+      <el-tooltip
         class="box-item"
         effect="dark"
         content="主题修改"
         placement="bottom"
       >
-      <el-icon>
-        <svg-icon icon="change-theme"></svg-icon>
-      </el-icon>
+        <el-icon>
+          <svg-icon icon="change-theme"></svg-icon>
+        </el-icon>
       </el-tooltip>
-       <el-tooltip
+      <el-tooltip
         class="box-item"
         effect="dark"
         content="国际化"
         placement="bottom"
       >
-      <el-icon>
-        <svg-icon icon="language"></svg-icon>
-      </el-icon>
+        <el-icon>
+          <svg-icon icon="language"></svg-icon>
+        </el-icon>
       </el-tooltip>
       <el-dropdown trigger="click" @command="handleCommand">
         <span class="el-dropdown-link">
@@ -69,6 +71,8 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb'
+import Hamburger from '@/components/Hamburger'
 const store = useStore()
 const router = useRouter()
 const avatarUrl = computed(() => {
@@ -101,6 +105,7 @@ console.log(avatarUrl)
 <style lang="scss" scoped>
 .navbar {
   height: 50px;
+  line-height: 50px;
   overflow: hidden;
   position: relative;
   background: #fff;
@@ -113,20 +118,21 @@ console.log(avatarUrl)
   .el-avatar {
     background: none;
   }
-  .navbar-left{
+  .navbar-left {
     float: left;
   }
-  .navbar-right{
+  .navbar-right {
     float: right;
     padding: 0 18px 0 0;
     font-size: 24px;
     color: #5a5e66;
-
-    .el-icon{
-        margin-top: 12px;
+    .el-icon {
+      margin-top: 12px;
       margin-right: 18px;
     }
   }
-
+  .hamburger-container {
+    float: left;
+  }
 }
 </style>
